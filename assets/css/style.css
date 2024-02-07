@@ -1,3 +1,11 @@
+html,body{
+    height: 100%;
+
+}
+body>footer{
+    position: sticky;
+    top: 100%;
+}
 /**style nav bar to be like a desrt**/
 nav ul li{
     display: inline;
@@ -34,4 +42,10 @@ img{
     width: 100%;
     height: auto;
     display: block;
+}
+footer{
+    text-align: center;
+    padding: 20px 0;
+    background: #333;
+    color: #fff;
 }
