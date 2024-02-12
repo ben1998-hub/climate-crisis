@@ -20,7 +20,23 @@ var questions = [
      "Lowers carbon dixide", "Contributes to global warming"],correct:3},
       {question:"Which practice helps reduce carbon emissions in agriculture?",Options:["Monoculture farming",
      "Overgrazing", "Sustainable farming", "Use of chemical fertilizers"],correct:2},
-]
+];
+//ADD timer//
+var currentQuestionIndex = 0;
+var timer;
+var timerleft = 10;
+function showQuestion(index){
+  var question = questions[index];
+  document.getElementById('question').textContent = question.question;
+   for (var i = 1; i <= 4; i++){
+    document.getElementById('option'+i).textContent = question.options[i-1];
+  }
+  resetTimer();
+}
+function resetTimer(){
+  clearInterval(timer);
+  timerleft = 10;
+}
 document.getElementById('simple-button').addEventListener('click', function () {
     alert('Button clicked!');
 })
