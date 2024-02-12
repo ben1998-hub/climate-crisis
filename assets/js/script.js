@@ -35,8 +35,26 @@ function showQuestion(index){
 }
 function resetTimer(){
   clearInterval(timer);
-  timerleft = 10;
+  timerLeft = 10;
+
+document.getElementById('time').textContent = timerLeft;
+timer = setInterval(function(){
+  timerleft--;
+  document.getElementById('time').textContent = timerLeft;
+  if (timerLeft <=0){
+    clearInterval(timer);
+    alert('Time is up!');
+    showNextQuestion();
+  }
+ }, 1000);
 }
-document.getElementById('simple-button').addEventListener('click', function () {
-    alert('Button clicked!');
-})
+function restartQuiz(){
+  currentQuestionIndex = 0;
+  showQuestion(currentQuestionIndex);
+}
+document.getElementById('next-button').addEventListener('click', showNextQuestion);
+document.getElementById('restart-button').addEventListener('click',restartQuiz);
+window.onload = function(){
+  showQuestion(currentQuestionIndex);
+}
+
