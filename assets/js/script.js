@@ -25,36 +25,63 @@ var questions = [
 var currentQuestionIndex = 0;
 var timer;
 var timerleft = 10;
+function startQuiz(){
+  document.getElementById('quiz-container').style.display = 'block';
+  document.getElementById('start-button').style.display = 'inline';
+  showQuestion(currentQuestionIndex);
+}
 function showQuestion(index){
   var question = questions[index];
   document.getElementById('question').textContent = question.question;
-   for (var i = 1; i <= 4; i++){
-    document.getElementById('option'+i).textContent = question.options[i-1];
-  }
-  resetTimer();
-}
-function resetTimer(){
-  clearInterval(timer);
-  timerLeft = 10;
+   
+  var optionsContainer = document.getElementById('options');
+  optionsContainer.innerHTML = '';
 
-document.getElementById('time').textContent = timerLeft;
+question.OptionsforEach(function(option, i){
+  var optionDiv = document.createElement('div');
+  optionDiv.textContent = option;
+  optionDiv.onclick = function(){SelectOption(i);};
+  optionsContainer.appendChild(optionDiv);
+});
+resetTimer();
+}
+function SelectOption(index){
+  clearInterval(timer);
+  if(index === questions[currentQuestionIndex].correct){
+    alert('Correct!');
+  } else {
+    alert('Incorrect!');
+  }
+  showNextQuestion();
+  }
+  function resetTimer(){
+    clearInterval(timer);
+    timeLeft = 10;
+  
+  document.getElementById('time').textContent = timeLeft;
 timer = setInterval(function(){
-  timerleft--;
-  document.getElementById('time').textContent = timerLeft;
-  if (timerLeft <=0){
+  timeLeft--;
+  document.getElementById('time').textContent = timeLeft;
+  if (timeLeft <=0){
     clearInterval(timer);
     alert('Time is up!');
-    showNextQuestion();
+    showNextQuestion
   }
- }, 1000);
+}, 1000);
 }
-function restartQuiz(){
-  currentQuestionIndex = 0;
-  showQuestion(currentQuestionIndex);
-}
-document.getElementById('next-button').addEventListener('click', showNextQuestion);
-document.getElementById('restart-button').addEventListener('click',restartQuiz);
-window.onload = function(){
-  showQuestion(currentQuestionIndex);
-}
-
+function showNextQuestion(){
+  if (currentQuestionIndex< questions.length - 1){
+    currentQuestionIndex++;
+    showQuestion(currentQuestionIndex);
+  } else{
+    alert('Quiz finished!');
+    restartQuiz();
+  }
+ }
+ function restartQuiz(){
+  currentQuestionIndex = 0
+  showNextQuestion(currentQuestionIndex);
+  resetTimer();
+ }
+ document.getElementById('start-button').addEventListener('click',startQuiz);
+ document.getElementById('restart-button').addEventListener('click',restartQuiz);
