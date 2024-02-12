@@ -4,7 +4,7 @@ var questions = [
      "Nartural Cycles", "Human Activity", "Orbital Variations"], correct: 2 },
      {question: "Which gas is most significant greenhous gas?",Options:["Methane","Nitrous Oxide",
       "Carbon Dioxide", "Chlorofluorocarbons"],correct:2},
-      {question:"Wath is the main source of rising sea levels?", options:["Glacier Melting", "Thermal Expansion of water",
+      {question:"What is the main source of rising sea levels?", options:["Glacier Melting", "Thermal Expansion of water",
      "Increased Precipitation", "Deforestation"],correct:1},
       {question:"Which sector is the largest emitter og green house gases?",Options:["Transportation","Agriculture", "Energy",
      "Industrail prcesses"],correct:2},
@@ -37,7 +37,7 @@ function showQuestion(index){
   var optionsContainer = document.getElementById('options');
   optionsContainer.innerHTML = '';
 
-question.OptionsforEach(function(option, i){
+question.Options.forEach(function(option, i){
   var optionDiv = document.createElement('div');
   optionDiv.textContent = option;
   optionDiv.onclick = function(){SelectOption(i);};
