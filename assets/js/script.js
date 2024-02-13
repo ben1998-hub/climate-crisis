@@ -31,20 +31,29 @@ function startQuiz(){
   showQuestion(currentQuestionIndex);
 }
 function showQuestion(index){
-  var question = questions[index];
-  document.getElementById('question').textContent = question.question;
-   
+  console.log('Current Index:', index);
+  console.log('Questions Array:',questions);
+  if(questions && questions[index])
+  {
+    questions[index].Options.forEach(function(option, i){
+
+
+    });
+  } else{
+    console.log('Questions array is not defined or current index is out of bounds');
+  }
+}
   var optionsContainer = document.getElementById('options');
   optionsContainer.innerHTML = '';
 
-question.Options.forEach(function(option, i){
+questions.Options.forEach(function(option, i){
   var optionDiv = document.createElement('div');
   optionDiv.textContent = option;
   optionDiv.onclick = function(){SelectOption(i);};
   optionsContainer.appendChild(optionDiv);
 });
 resetTimer();
-}
+
 function SelectOption(index){
   clearInterval(timer);
   if(index === questions[currentQuestionIndex].correct){
