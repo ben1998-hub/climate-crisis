@@ -22,12 +22,14 @@ var questions = [
      "Overgrazing", "Sustainable farming", "Use of chemical fertilizers"],correct:2},
 ];
 //ADD timer//
-var currentQuestionIndex = 0;
-var timer;
-var timerleft = 10;
+//change var to let to ensure it's not undefined//
+let currentQuestionIndex = 0;
+let timer;
+let timerleft = 10;
 function startQuiz(){
   document.getElementById('quiz-container').style.display = 'block';
-  document.getElementById('start-button').style.display = 'inline';
+  document.getElementById('start-button').style.display = 'none';
+  document.getElementById('restart-button').style.display = 'inline';
   showQuestion(currentQuestionIndex);
 }
 function showQuestion(index){
@@ -74,7 +76,7 @@ timer = setInterval(function(){
   if (timeLeft <=0){
     clearInterval(timer);
     alert('Time is up!');
-    showNextQuestion
+    showNextQuestion;
   }
 }, 1000);
 }
