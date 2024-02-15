@@ -42,12 +42,27 @@ var questions = [
   },
 ];
 //ADD timer//
-//change var to let to ensure it's not undefined//
 let currentQuestionIndex = 0;
 let timer;
-let timerleft = 10;
+let timerLeft = 10;
 let correctAnswer = 0;
 let incorrectAnswer = 0;
+//call this function to udate the score disply//
+function udateScoreDisplay(){
+  document.getElementById('correct-score').textContent = correctAnswer;
+  document.getElementById('incorrect-answer').textContent = incorrectAnswer;
+}
+function showResultMessage(isCorrect){
+  var resultMessage = isCorrect ? 'Correct!' : 'Incorrect!';
+  console.log(resultMessage);
+}
+  function showNextQuestion() {
+    if (currentQuestionIndex < questions.length - 1) {
+      currentQuestionIndex++;
+      showQuestion(currentQuestionIndex);
+    } else {
+}
+  }
 function startQuiz() {
   document.getElementById('quiz-container').style.display = 'block';
   document.getElementById('start-button').style.display = 'none';
@@ -114,15 +129,11 @@ function resetTimer() {
     }
   }, 1000);
 }
-function showNextQuestion() {
-  if (currentQuestionIndex < questions.length - 1) {
-    currentQuestionIndex++;
-    showQuestion(currentQuestionIndex);
-  } else {
+
     alert('Quiz finished!');
     // restartQuiz();
-  }
-}
+  
+
 function restartQuiz() {
   currentQuestionIndex = 0
   showNextQuestion(currentQuestionIndex);
