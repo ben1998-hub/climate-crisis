@@ -61,9 +61,8 @@ function showNextQuestion() {
     currentQuestionIndex++;
     showQuestion(currentQuestionIndex);
   } else {
-    document.getElementById('quiz-container').style.display = 'block';
-    document.getElementById('start-button').style.display = 'none';
-    var finalMessage = 'Quiz finished! you got ' + correctAnswer + ' correct out of ' + questions.length ' questions.';
+    document.getElementById('quiz-container').style.display = 'none';
+    var finalMessage = 'Quiz finished! you got ' + correctAnswer + ' correct out of ' + questions.length + ' questions.';
     console.log(finalMessage);
     document.getElementById('score-container').innerHTML = finalMessage;
     //show the score container with the final message//
@@ -71,25 +70,8 @@ function showNextQuestion() {
   }
 }
 
-
-
-document.getElementById('question').textContent = `Q${index + 1}. ${question.question}`;
-
-var optionsContainer = document.getElementById('options');
-optionsContainer.innerHTML = '';
-
-question.Options.forEach(function (option, i) {
-  var optionDiv = document.createElement('div');
-  optionDiv.textContent = option;
-  optionDiv.dataset.index = i;
-  optionDiv.onclick = function () { selectOption(optionDiv, question.correct); };
-  optionsContainer.appendChild(optionDiv);
-});
-
-resetTimer();
-
 function selectOption(optionDiv, answer) {
-  let userAnswer = parseInt (optionDiv.dataset.index, 10);
+  let userAnswer = parseInt(optionDiv.dataset.index, 10);
 
   if (userAnswer === answer) {
     correctAnswer++;
@@ -101,56 +83,121 @@ function selectOption(optionDiv, answer) {
   updateScoreDisplay();
   showResultMessage(userAnswer === answer);
   setTimeout(showNextQuestion, 1000) //delay befour showing next question//
+}
+//function to display current question and options
+function showQuestion(index) {
+  var question = questions[index];
+  var optionsContainer = document.getElementById('options');
+  optionsContainer.innerHTML = '';
 
+
+  question.option.forEach(function (option, i) {
+    var optionDiv = document.createElement('div');
+    optionDiv.textContent = option;
+    optionDiv.dataset.index = i;
+    optionDiv.onclick = function () { selectOption(optionDiv, questions.correct); };
+    optionsContainer.appendChild(optionDiv);
+  });
+
+  resetTimer();
+
+  resetTimer();
+  //timer function
+  function resetTimer() {
+    clearInterval(timer);
+    timeLeft = 10;
+
+    document.getElementById('time').textContent = timeLeft;
+    timer = setInterval(function () {
+      timeLeft--;
+
+      document.getElementById('time').textContent = timeLeft;
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        showNextQuestion();
+      }
+    }, 1000);
+  }
+
+
+  //get rid of alert
+  // function start the quiz 
+  function startQuiz() {
+    document.getElementById('quiz-container').style.display = 'block';
+    document.getElementById('start-button').style.display = 'none';
+    document.getElementById('restart-button').style.display = 'inline';
+    document.getElementById('score-container').style.display = 'block';
+    //show the score container
+    showQuestion(currentQuestionIndex);
+  }
+
+  // function to restart quiz 
+
+
+  function restartQuiz() {
+    currentQuestionIndex = 0
+    correctAnswer = 0;
+    incorrectAnswer = 0;
+    udateScoreDisplay();
+    document.getElementById('score-container').style.display = 'none';//hide the score until the quiz starts again 
+
+    //start the quiz
+    startQuiz();
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('start-button').addEventListener('click', startQuiz);
+    document.getElementById('restart-button').addEventListener('click', restartQuiz);
+  });
+
+
+
+
+
+  var optionsContainer = document.getElementById('options');
+  optionsContainer.innerHTML = '';
+
+  question.Options.forEach(function (option, i) {
+    var optionDiv = document.createElement('div');
+    optionDiv.textContent = option;
+    optionDiv.dataset.index = i;
+    optionDiv.onclick = function () { selectOption(optionDiv, question.correct); };
+    optionsContainer.appendChild(optionDiv);
+  });
+
+  resetTimer();
   clearInterval(timer);
   setTimeout(() => {
     showNextQuestion();
   }, 1000);
 }
-//function to display current question and options
-function showQuestion(index){
-  varquestion = questions[index];
-  var optionsContainer = document.getElementById('options');
-  optionsContainer.innerHTML = '';
-}
 
-question.option.forEach(function(option, i){
-  var optionDiv = document.createElement('div');
-  optionDiv.textContent = option;
-  optionDiv.dataset.index = i;
-  optionDiv.onclick = function() {selectOption(optionDiv, questions.correct);};
-  optionsContainer.appendChild(optionDiv);
-});
 
-resetTimer();
-//timer function
-function resetTimer() {
-  clearInterval(timer);
-  timeLeft = 10;
-
-  document.getElementById('time').textContent = timeLeft;
-  timer = setInterval(function () {
-    timeLeft--;
-
-    document.getElementById('time').textContent = timeLeft;
-    if (timeLeft <= 0) {
-      clearInterval(timer);
-      showNextQuestion();
-    }
-  }, 1000);
-}
 
 //get rid of alert
+// function start the quiz 
+function startQuiz() {
+  document.getElementById('quiz-container').style.display = 'block';
+  document.getElementById('start-button').style.display = 'none';
+  document.getElementById('restart-button').style.display = 'inline';
+  document.getElementById('score-container').style.display = 'block';
+  //show the score container
+  showQuestion(currentQuestionIndex);
+}
 
-// restartQuiz();
+// function to restart quiz 
 
 
 function restartQuiz() {
   currentQuestionIndex = 0
-  showNextQuestion(currentQuestionIndex);
-  resetTimer();
-}
+  correctAnswer = 0;
+  incorrectAnswer = 0;
+  udateScoreDisplay();
+  document.getElementById('score-container').style.display = 'none';//hide the score until the quiz starts again 
 
+  //start the quiz
+  startQuiz();
+}
 document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('start-button').addEventListener('click', startQuiz);
   document.getElementById('restart-button').addEventListener('click', restartQuiz);
