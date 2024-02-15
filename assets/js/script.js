@@ -46,6 +46,8 @@ var questions = [
 let currentQuestionIndex = 0;
 let timer;
 let timerleft = 10;
+let correctAnswer = 0;
+let incorrectAnswer = 0;
 function startQuiz() {
   document.getElementById('quiz-container').style.display = 'block';
   document.getElementById('start-button').style.display = 'none';
@@ -59,7 +61,7 @@ function showQuestion(index) {
 
 
 
-  document.getElementById('question').textContent = `Q${index+1}. ${question.question}`;
+  document.getElementById('question').textContent = `Q${index + 1}. ${question.question}`;
 
   var optionsContainer = document.getElementById('options');
   optionsContainer.innerHTML = '';
@@ -76,11 +78,13 @@ function showQuestion(index) {
 }
 function selectOption(optionDiv, answer) {
   let userAnswer = optionDiv.dataset.index;
-  
+
   if (userAnswer == answer) {
     optionDiv.classList.add('correct');
+    correctAnswer = + 1;
   } else {
     optionDiv.classList.add('incorrect');
+    incorrectAnswer = +1;
   }
 
   clearInterval(timer);

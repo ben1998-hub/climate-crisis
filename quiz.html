@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,37 +8,44 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="icon" href="assets/images/favicon.ico">
 </head>
+
 <body>
     <header>
 
-            <a href="index.html">
-                <h1 id="logo">Crisis</h1>
-            </a>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="quiz.html">Quiz</a></li>
-                    <li><a href="rules.html">Rules</a></li>
-                    <li><a href="about.html">About</a></li>
-                </ul>
-            </nav>
+        <a href="index.html">
+            <h1 id="logo">Crisis</h1>
+        </a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="quiz.html">Quiz</a></li>
+                <li><a href="rules.html">Rules</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </nav>
 
     </header>
     <h2>Are You Ready To Start The Quiz</h2>
     <div id="quiz-container" style="display: none;">
-    <div id="question"></div>
-    <div id="options"></div>
-    <div id="timer">Time left:
-        <span id="time">10</span>seconds</div>
+        <div id="question"></div>
+        <div id="options"></div>
+        <div id="timer">Time left:
+            <span id="time">10</span>seconds
+        </div>
     </div>
+    <div id="score-container" style="display: none;">
+        Correct Answer: <span id="correct-score">0</span><br>
+        Incorrect Answer: <span id="incorrect-score">0</span></div>
     <button id="start-button">Start Quiz</button>
     <button id="restart-button" style="display: none;">Restart Quiz</button>
-    
-    
-    
+
+
+
     <footer>
-        <p>&copy;2024 We Climate Crisis. All rights reserved.<P>
-      </footer>
+        <p>&copy;2024 We Climate Crisis. All rights reserved.
+        <P>
+    </footer>
     <script src="assets/js/script.js"></script>
-    </body>
+</body>
+
 </html>
