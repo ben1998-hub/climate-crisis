@@ -48,72 +48,82 @@ let timerLeft = 10;
 let correctAnswer = 0;
 let incorrectAnswer = 0;
 //call this function to udate the score disply//
-function udateScoreDisplay(){
+function udateScoreDisplay() {
   document.getElementById('correct-score').textContent = correctAnswer;
   document.getElementById('incorrect-answer').textContent = incorrectAnswer;
 }
-function showResultMessage(isCorrect){
+function showResultMessage(isCorrect) {
   var resultMessage = isCorrect ? 'Correct!' : 'Incorrect!';
   console.log(resultMessage);
 }
-  function showNextQuestion() {
-    if (currentQuestionIndex < questions.length - 1) {
-      currentQuestionIndex++;
-      showQuestion(currentQuestionIndex);
-    } else {
-}
-  }
-function startQuiz() {
-  document.getElementById('quiz-container').style.display = 'block';
-  document.getElementById('start-button').style.display = 'none';
-  document.getElementById('restart-button').style.display = 'inline';
-  showQuestion(currentQuestionIndex);
-}
-function showQuestion(index) {
-  if (index >= 0 && index < questions.length) {
-    var question = questions[index];
-  }
-
-
-
-  document.getElementById('question').textContent = `Q${index + 1}. ${question.question}`;
-
-  var optionsContainer = document.getElementById('options');
-  optionsContainer.innerHTML = '';
-
-  question.Options.forEach(function (option, i) {
-    var optionDiv = document.createElement('div');
-    optionDiv.textContent = option;
-    optionDiv.dataset.index = i;
-    optionDiv.onclick = function () { selectOption(optionDiv, question.correct); };
-    optionsContainer.appendChild(optionDiv);
-  });
-
-  resetTimer();
-}
-function selectOption(optionDiv, answer) {
-  let userAnswer = optionDiv.dataset.index;
-
-  if (userAnswer == answer) {
-    optionDiv.classList.add('correct');
-    correctAnswer = + 1;
+function showNextQuestion() {
+  if (currentQuestionIndex < questions.length - 1) {
+    currentQuestionIndex++;
+    showQuestion(currentQuestionIndex);
   } else {
-    optionDiv.classList.add('incorrect');
-    incorrectAnswer = +1;
+    document.getElementById('quiz-container').style.display = 'block';
+    document.getElementById('start-button').style.display = 'none';
+    var finalMessage = 'Quiz finished! you got ' + correctAnswer + ' correct out of ' + questions.length ' questions.';
+    console.log(finalMessage);
+    document.getElementById('score-container').innerHTML = finalMessage;
+    //show the score container with the final message//
+    document.getElementById('socre-container').style.display = 'block';
   }
+}
+
+
+
+document.getElementById('question').textContent = `Q${index + 1}. ${question.question}`;
+
+var optionsContainer = document.getElementById('options');
+optionsContainer.innerHTML = '';
+
+question.Options.forEach(function (option, i) {
+  var optionDiv = document.createElement('div');
+  optionDiv.textContent = option;
+  optionDiv.dataset.index = i;
+  optionDiv.onclick = function () { selectOption(optionDiv, question.correct); };
+  optionsContainer.appendChild(optionDiv);
+});
+
+resetTimer();
+
+function selectOption(optionDiv, answer) {
+  let userAnswer = parseInt (optionDiv.dataset.index, 10);
+
+  if (userAnswer === answer) {
+    correctAnswer++;
+    optionDiv.classList.add('correct');
+  } else {
+    incorrectAnswer++;
+    optionDiv.classList.add('incorrect');
+  }
+  updateScoreDisplay();
+  showResultMessage(userAnswer === answer);
+  setTimeout(showNextQuestion, 1000) //delay befour showing next question//
 
   clearInterval(timer);
   setTimeout(() => {
     showNextQuestion();
   }, 1000);
 }
-// if (index === questions[currentQuestionIndex].correct) {
-//   alert('Correct!');
-// } else {
-//   alert('Incorrect!');
-// }
-// showNextQuestion();
+//function to display current question and options
+function showQuestion(index){
+  varquestion = questions[index];
+  var optionsContainer = document.getElementById('options');
+  optionsContainer.innerHTML = '';
+}
 
+question.option.forEach(function(option, i){
+  var optionDiv = document.createElement('div');
+  optionDiv.textContent = option;
+  optionDiv.dataset.index = i;
+  optionDiv.onclick = function() {selectOption(optionDiv, questions.correct);};
+  optionsContainer.appendChild(optionDiv);
+});
+
+resetTimer();
+//timer function
 function resetTimer() {
   clearInterval(timer);
   timeLeft = 10;
@@ -130,9 +140,9 @@ function resetTimer() {
   }, 1000);
 }
 
-    alert('Quiz finished!');
-    // restartQuiz();
-  
+alert('Quiz finished!');
+// restartQuiz();
+
 
 function restartQuiz() {
   currentQuestionIndex = 0
