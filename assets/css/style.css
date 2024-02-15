@@ -64,10 +64,19 @@ footer{
     cursor: pointer;
 }
 #options div:hover {
-    background-color: #c03c3c;
+    background-color: yellow;
 }
 button{
     margin-top: 20px;
     padding: 10px 20px;
     cursor: pointer;
+}
+
+#options .correct{
+    background-color: green;
+
+}
+#options .incorrect{
+    background-color: red;
+    
 }
