@@ -140,7 +140,8 @@ function resetTimer() {
   }, 1000);
 }
 
-alert('Quiz finished!');
+//get rid of alert
+
 // restartQuiz();
 
 
