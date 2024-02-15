@@ -82,7 +82,7 @@ function selectOption(optionDiv, answer) {
   }
   updateScoreDisplay();
   showResultMessage(userAnswer === answer);
-  setTimeout(showNextQuestion, 1000) //delay befour showing next question//
+  setTimeout(showNextQuestion, 1000); //delay befour showing next question//
 }
 //function to display current question and options
 function showQuestion(index) {
@@ -91,7 +91,7 @@ function showQuestion(index) {
   optionsContainer.innerHTML = '';
 
 
-  question.Option.forEach(function (option, i) {
+  question.Options.forEach(function (option, i) {
     var optionDiv = document.createElement('div');
     optionDiv.textContent = option;
     optionDiv.dataset.index = i;
@@ -99,28 +99,24 @@ function showQuestion(index) {
     optionsContainer.appendChild(optionDiv);
   });
 
-  resetTimer();
 
-  resetTimer();
-  //timer function
-  function resetTimer() {
-    clearInterval(timer);
-    timeLeft = 10;
+resetTimer();
+}
+function resetTimer(){
+  clearInterval(timer);
+  timerLeft = 10;
 
-    document.getElementById('time').textContent = timeLeft;
-    timer = setInterval(function () {
-      timeLeft--;
-
-      document.getElementById('time').textContent = timeLeft;
-      if (timeLeft <= 0) {
-        clearInterval(timer);
-        showNextQuestion();
-      }
-    }, 1000);
-  }
-
-
-  //get rid of alert
+document.getElementById('time').textContent = timerLeft;
+timer = setInterval(function(){
+  timerLeft--;
+  document.getElementById('time').textContent = timerLeft;
+if(timerLeft <= 0){
+  clearInterval(timer);
+  showNextQuestion();
+}
+},1000);
+}
+//get rid of alert
   // function start the quiz 
   function startQuiz() {
     document.getElementById('quiz-container').style.display = 'block';
@@ -135,70 +131,14 @@ function showQuestion(index) {
 
 
   function restartQuiz() {
-    currentQuestionIndex = 0
+    currentQuestionIndex = 0;
     correctAnswer = 0;
     incorrectAnswer = 0;
     udateScoreDisplay();
     document.getElementById('score-container').style.display = 'none';//hide the score until the quiz starts again 
-
-    //start the quiz
-    startQuiz();
   }
 
   document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('start-button').addEventListener('click', startQuiz);
     document.getElementById('restart-button').addEventListener('click', restartQuiz);
   });
-
-
-
-
-
-  var optionsContainer = document.getElementById('options');
-  optionsContainer.innerHTML = '';
-
-  question.Options.forEach(function (option, i) {
-    var optionDiv = document.createElement('div');
-    optionDiv.textContent = option;
-    optionDiv.dataset.index = i;
-    optionDiv.onclick = function () { selectOption(optionDiv, question.correct); };
-    optionsContainer.appendChild(optionDiv);
-  });
-
-  resetTimer();
-  clearInterval(timer);
-  setTimeout(() => {
-    showNextQuestion();
-  }, 1000);
-}
-
-
-
-//get rid of alert
-// function start the quiz 
-function startQuiz() {
-  document.getElementById('quiz-container').style.display = 'block';
-  document.getElementById('start-button').style.display = 'none';
-  document.getElementById('restart-button').style.display = 'inline';
-  document.getElementById('score-container').style.display = 'block';
-  //show the score container
-  showQuestion(currentQuestionIndex);
-}
-
-// function to restart quiz 
-
-
-function restartQuiz() {
-  currentQuestionIndex = 0
-  correctAnswer = 0;
-  incorrectAnswer = 0;
-  udateScoreDisplay();
-  document.getElementById('score-container').style.display = 'none';//hide the score until the quiz starts again 
-
-  //start the quiz
-  startQuiz();
-}
-document.addEventListener('DOMContentLoaded', function () {
-  document.getElementById('start-button').addEventListener('click', startQuiz);
-  document.getElementById('restart-button').addEventListener('click', restartQuiz);
-});
