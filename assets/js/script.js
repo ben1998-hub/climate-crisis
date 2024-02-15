@@ -91,7 +91,7 @@ function showQuestion(index) {
   optionsContainer.innerHTML = '';
 
 
-  question.option.forEach(function (option, i) {
+  question.Option.forEach(function (option, i) {
     var optionDiv = document.createElement('div');
     optionDiv.textContent = option;
     optionDiv.dataset.index = i;

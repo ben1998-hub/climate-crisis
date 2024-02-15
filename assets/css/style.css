@@ -61,7 +61,7 @@ footer {
     margin: auto;
     width: 300px;
     padding: 2px;
-    border: 1px soild #0c0c0c;
+    border: 1px soild #ddd;
     border-radius: 5px;
 }
 
@@ -71,6 +71,7 @@ footer {
     background-color: #4008b1;
     border: 1px soild #db27ab;
     cursor: pointer;
+    transition: background-color 0.3;
 }
 
 #options div:hover {
@@ -83,13 +84,13 @@ button {
     cursor: pointer;
 }
 
-#options .correct {
-    background-color: green;
+#options div.correct {
+    background-color: #c8e6c9;/*light green for correct answers*/
 
 }
 
-#options .incorrect {
-    background-color: red;
+#options div .incorrect {
+    background-color: #ffcdd2;/*light for incorrect answers*/
 
 }
 
@@ -98,4 +99,8 @@ button {
     /*initially hidden, shown when quiz starts*/
     margin-top: 20px;
     font-size: 1.2em;
+    display: none;
+}
+#timer{
+    margin-top: 20px;
 }
