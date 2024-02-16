@@ -113,6 +113,9 @@ function showQuestion(index) {
     var question = questions[index];
     var optionsContainer = document.getElementById('options');
     optionsContainer.innerHTML = '';
+    var questionDiv = document.createElement('div');
+questionDiv.textContent = question.question;
+optionsContainer.appendChild(questionDiv);
 
     for (var i = 0; i < question.options.length; i++) {
       var optionDiv = document.createElement('div');
@@ -151,15 +154,14 @@ function startQuiz() {
   resetTimer(); // Call the resetTimer function
   showQuestion(currentQuestionIndex);
 }
-
 function restartQuiz() {
-  currentQuestionIndex = 0;
-  correctAnswer = 0;
-  incorrectAnswer = 0;
-  updateScoreDisplay();
-  document.getElementById('score-container').style.display = 'none';
-  resetTimer(); // Call the resetTimer function
-  showQuestion(currentQuestionIndex);
+currentQuestionIndex = 0;
+correctAnswer = 0;
+incorrectAnswer = 0;
+updateScoreDisplay();
+document.getElementById('score-container').style.display = 'none';
+document.getElementById('quiz-container').style.display = 'block';
+showQuestion(currentQuestionIndex);
 }
 
 document.addEventListener('DOMContentLoaded', function () {
