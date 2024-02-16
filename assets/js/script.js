@@ -1,77 +1,99 @@
-//Add questions here//
+// Add questions here
 var questions = [
   {
-    question: "What is the primary cause of climate change?", Options: ["Solar Variability",
-      "Nartural Cycles", "Human Activity", "Orbital Variations"], correct: 2
+    question: "What is the primary cause of climate change?",
+    options: ["Solar Variability", "Natural Cycles", "Human Activity", "Orbital Variations"],
+    correct: 2
   },
   {
-    question: "Which gas is most significant greenhous gas?", Options: ["Methane", "Nitrous Oxide",
-      "Carbon Dioxide", "Chlorofluorocarbons"], correct: 2
+    question: "Which gas is the most significant greenhouse gas?",
+    options: ["Methane", "Nitrous Oxide", "Carbon Dioxide", "Chlorofluorocarbons"],
+    correct: 2
   },
   {
-    question: "What is the main source of rising sea levels?", Options: ["Glacier Melting", "Thermal Expansion of water",
-      "Increased Precipitation", "Deforestation"], correct: 1
+    question: "What is the main source of rising sea levels?",
+    options: ["Glacier Melting", "Thermal Expansion of Water", "Increased Precipitation", "Deforestation"],
+    correct: 1
   },
   {
-    question: "Which sector is the largest emitter of green house gases?", Options: ["Transportation", "Agriculture", "Energy",
-      "Industrail prcesses"], correct: 2
+    question: "Which sector is the largest emitter of greenhouse gases?",
+    options: ["Transportation", "Agriculture", "Energy", "Industrial Processes"],
+    correct: 2
   },
   {
-    question: "What can individuals do to reduce their carbon footprint?", Options: ["Use more plastic", "Increase meat consumption",
-      "Use public transport", "leave lights on"], correct: 2
+    question: "What can individuals do to reduce their carbon footprint?",
+    options: ["Use more plastic", "Increase meat consumption", "Use public transport", "Leave lights on"],
+    correct: 2
   },
   {
-    question: "Which renewable energy source is most widely used?", Options: ["Solar power", "Wind power", "Hydropower",
-      "Geothermal energy"], correct: 2
+    question: "Which renewable energy source is most widely used?",
+    options: ["Solar power", "Wind power", "Hydropower", "Geothermal energy"],
+    correct: 2
   },
   {
-    question: "What is the goal of the Paris Agreement?", Options: ["Limit gobal rarming to 2 degrees Celsius", "promote coal use",
-      "Increase global temperatures", "Reduce biodiversity"], correct: 0
+    question: "What is the goal of the Paris Agreement?",
+    options: ["Limit global warming to 2 degrees Celsius", "Promote coal use", "Increase global temperatures", "Reduce biodiversity"],
+    correct: 0
   },
   {
-    question: "What phenomenon causes more intense and frequent weather events?", Options: ["EL Niño", "Global Warming",
-      "La Niño", "Solar Flares"], correct: 1
+    question: "What phenomenon causes more intense and frequent weather events?",
+    options: ["El Niño", "Global Warming", "La Niña", "Solar Flares"],
+    correct: 1
   },
   {
-    question: "What is the impact of deforestation on the climate?", Options: ["Increases oxygen", "Reduces Biodiversity",
-      "Lowers carbon dixide", "Contributes to global warming"], correct: 3
+    question: "What is the impact of deforestation on the climate?",
+    options: ["Increases oxygen", "Reduces biodiversity", "Lowers carbon dioxide", "Contributes to global warming"],
+    correct: 3
   },
   {
-    question: "Which practice helps reduce carbon emissions in agriculture?", Options: ["Monoculture farming",
-      "Overgrazing", "Sustainable farming", "Use of chemical fertilizers"], correct: 2
+    question: "Which practice helps reduce carbon emissions in agriculture?",
+    options: ["Monoculture farming", "Overgrazing", "Sustainable farming", "Use of chemical fertilizers"],
+    correct: 2
   },
 ];
-//ADD timer//
+
 let currentQuestionIndex = 0;
 let timer;
 let timerLeft = 10;
 let correctAnswer = 0;
 let incorrectAnswer = 0;
-//call this function to udate the score disply//
-function udateScoreDisplay() {
-  document.getElementById('correct-score').textContent = correctAnswer;
-  document.getElementById('incorrect-answer').textContent = incorrectAnswer;
+
+function updateScoreDisplay() {
+  var correctScoreElement = document.getElementById('correct-score');
+  var incorrectScoreElement = document.getElementById('incorrect-score');
+  if (correctScoreElement && incorrectScoreElement) {
+    correctScoreElement.textContent = correctAnswer;
+    incorrectScoreElement.textContent = incorrectAnswer;
+  }
 }
+
 function showResultMessage(isCorrect) {
   var resultMessage = isCorrect ? 'Correct!' : 'Incorrect!';
-  console.log(resultMessage);
+  // Display or use resultMessage as needed
 }
+
 function showNextQuestion() {
   if (currentQuestionIndex < questions.length - 1) {
     currentQuestionIndex++;
     showQuestion(currentQuestionIndex);
   } else {
     document.getElementById('quiz-container').style.display = 'none';
-    var finalMessage = 'Quiz finished! you got ' + correctAnswer + ' correct out of ' + questions.length + ' questions.';
+    var finalMessage = 'Quiz finished! You got ' + correctAnswer + ' correct out of ' + questions.length + ' questions.';
     console.log(finalMessage);
     document.getElementById('score-container').innerHTML = finalMessage;
-    //show the score container with the final message//
-    document.getElementById('socre-container').style.display = 'block';
+    document.getElementById('score-container').style.display = 'block';
   }
 }
 
 function selectOption(optionDiv, answer) {
   let userAnswer = parseInt(optionDiv.dataset.index, 10);
+
+  
+  let optionsContainer = document.getElementById('options');
+  let selectedOptions = optionsContainer.getElementsByClassName('correct');
+  for (let i = 0; i < selectedOptions.length; i++) {
+    selectedOptions[i].classList.remove('correct');
+  }
 
   if (userAnswer === answer) {
     correctAnswer++;
@@ -80,65 +102,67 @@ function selectOption(optionDiv, answer) {
     incorrectAnswer++;
     optionDiv.classList.add('incorrect');
   }
+
   updateScoreDisplay();
   showResultMessage(userAnswer === answer);
-  setTimeout(showNextQuestion, 1000); //delay befour showing next question//
+  setTimeout(showNextQuestion, 1000);
 }
-//function to display current question and options
+
 function showQuestion(index) {
-  var question = questions[index];
-  var optionsContainer = document.getElementById('options');
-  optionsContainer.innerHTML = '';
+  if (index < questions.length) {
+    var question = questions[index];
+    var optionsContainer = document.getElementById('options');
+    optionsContainer.innerHTML = '';
 
+    for (var i = 0; i < question.options.length; i++) {
+      var optionDiv = document.createElement('div');
+      optionDiv.textContent = question.options[i];
+      optionDiv.dataset.index = i;
+      (function (q, option) {
+        option.onclick = function () { selectOption(option, q.correct); };
+      })(question, optionDiv);
+      optionsContainer.appendChild(optionDiv);
+    }
 
-  question.Options.forEach(function (option, i) {
-    var optionDiv = document.createElement('div');
-    optionDiv.textContent = option;
-    optionDiv.dataset.index = i;
-    optionDiv.onclick = function () { selectOption(optionDiv, questions.correct); };
-    optionsContainer.appendChild(optionDiv);
-  });
-
-
-resetTimer();
+    resetTimer(); // Call the resetTimer function
+  }
 }
-function resetTimer(){
+
+function resetTimer() {
   clearInterval(timer);
   timerLeft = 10;
 
-document.getElementById('time').textContent = timerLeft;
-timer = setInterval(function(){
-  timerLeft--;
   document.getElementById('time').textContent = timerLeft;
-if(timerLeft <= 0){
-  clearInterval(timer);
-  showNextQuestion();
+  timer = setInterval(function () {
+    timerLeft--;
+    document.getElementById('time').textContent = timerLeft;
+    if (timerLeft <= 0) {
+      clearInterval(timer);
+      showNextQuestion();
+    }
+  }, 1000);
 }
-},1000);
+
+function startQuiz() {
+  document.getElementById('quiz-container').style.display = 'block';
+  document.getElementById('start-button').style.display = 'none';
+  document.getElementById('restart-button').style.display = 'inline';
+  document.getElementById('score-container').style.display = 'block';
+  resetTimer(); // Call the resetTimer function
+  showQuestion(currentQuestionIndex);
 }
-//get rid of alert
-  // function start the quiz 
-  function startQuiz() {
-    document.getElementById('quiz-container').style.display = 'block';
-    document.getElementById('start-button').style.display = 'none';
-    document.getElementById('restart-button').style.display = 'inline';
-    document.getElementById('score-container').style.display = 'block';
-    //show the score container
-    showQuestion(currentQuestionIndex);
-  }
 
-  // function to restart quiz 
+function restartQuiz() {
+  currentQuestionIndex = 0;
+  correctAnswer = 0;
+  incorrectAnswer = 0;
+  updateScoreDisplay();
+  document.getElementById('score-container').style.display = 'none';
+  resetTimer(); // Call the resetTimer function
+  showQuestion(currentQuestionIndex);
+}
 
-
-  function restartQuiz() {
-    currentQuestionIndex = 0;
-    correctAnswer = 0;
-    incorrectAnswer = 0;
-    udateScoreDisplay();
-    document.getElementById('score-container').style.display = 'none';//hide the score until the quiz starts again 
-  }
-
-  document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('start-button').addEventListener('click', startQuiz);
-    document.getElementById('restart-button').addEventListener('click', restartQuiz);
-  });
+document.addEventListener('DOMContentLoaded', function () {
+  document.getElementById('start-button').addEventListener('click', startQuiz);
+  document.getElementById('restart-button').addEventListener('click', restartQuiz);
+});
