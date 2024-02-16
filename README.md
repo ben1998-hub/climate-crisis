@@ -1,7 +1,7 @@
 # [CLIMATE CRISIS](https://ben1998-hub.github.io/climate-crisis)
 This project is responsive front-end web application about the climate crisis and there's even a really fun quiz game to help people learn and under stand how important gobal warming is to us all!
 
-![screenshot](docmentation/scrrenshot1.png)
+![screenshot](documentation/scrrenshot1.png)
 Am I Responsive" website.
 Here's my deployed site as an example:
 https://ui.dev/amiresponsive?url=https://ben1998-hub.github.io/climate-crisis
@@ -11,8 +11,8 @@ https://ui.dev/amiresponsive?url=https://ben1998-hub.github.io/climate-crisis
 ## UX
 ## colour Schmeme
 the design of this projected was inspired by climate change its self from the dusty sandy desert colour on the nav bar or through the multiple pictures through out this sit
-![screenshot](docmentation/screenshot2.png)
-![screenshot](docmentation/screenshot3.png)
+![screenshot](documentation/screenshot2.png)
+![screenshot](documentation/screenshot3.png)
 
 
 
@@ -25,7 +25,7 @@ the design of this projected was inspired by climate change its self from the du
 -  #ddd;` used for primary highlights.
 - ` #fff; used for secondary text.
 - `rgba(0, 0, 0, 0.5);used for secondary highlights.
-![screenshoot](docmentation/screenshot4.png)
+![screenshoot](documentation/screenshot4.png)
 
 
 
@@ -43,7 +43,7 @@ the design of this projected was inspired by climate change its self from the du
 ## Features
 
 Features in this site are an interactive nav bar, a quiz game with a count down of 10 sconds and a rules section.
-![screenshot](docmentation/screenshot5.png)
+![screenshot](documentation/screenshot5.png)
 
 
 Also there is many more features on this project such as a restart button, and an about section that educate people on global warming
